@@ -1,0 +1,3 @@
+class ToyRobotSim::Table
+
+end
