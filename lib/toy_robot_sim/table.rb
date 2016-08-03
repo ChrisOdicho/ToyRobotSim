@@ -5,6 +5,8 @@ class ToyRobotSim::Table
     @height = height
   end
 
+  #############################################################################
+
   def width
     @width ||= self.width
   end
@@ -12,6 +14,8 @@ class ToyRobotSim::Table
   def height
     @height ||= self.height
   end
+
+  #############################################################################
 
   def width_in_range?(x)
     x >= 0 && x <= (width - 1)
