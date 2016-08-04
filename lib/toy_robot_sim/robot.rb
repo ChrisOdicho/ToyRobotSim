@@ -2,7 +2,7 @@ class ToyRobotSim::Robot
 
   DIRECTIONS = %w(NORTH EAST SOUTH WEST)
 
-  attr_accessor :location
+  attr_reader :table, :location, :direction
 
   #############################################################################
 
@@ -12,19 +12,9 @@ class ToyRobotSim::Robot
 
   #############################################################################
 
-  def table
-    @table ||= self.table
-  end
-
-  def direction
-    @direction ||= self.direction
-  end
-
-  #############################################################################
-
   def place(location, direction)
     if valid_move?(location, direction)
-      @location = location
+      @location  = location
       @direction = direction
     end
   end
@@ -42,13 +32,17 @@ class ToyRobotSim::Robot
     turn(1)
   end
 
+  def report
+    "#{@location.x},#{@location.y},#{@direction}"
+  end
+
+  #############################################################################
+
+  private
+
   def turn(left_or_right)
     current_index = DIRECTIONS.index(@direction)
     @direction    = DIRECTIONS.rotate(left_or_right)[current_index]
-  end
-
-  def report
-    "#{@location.x},#{@location.y},#{@direction}"
   end
 
   def valid_move?(location, direction)

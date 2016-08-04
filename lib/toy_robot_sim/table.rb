@@ -1,5 +1,7 @@
 class ToyRobotSim::Table
 
+  attr_reader :width, :height
+
   def initialize(width, height)
     @width = width
     @height = height
@@ -7,19 +9,13 @@ class ToyRobotSim::Table
 
   #############################################################################
 
-  def width
-    @width ||= self.width
-  end
-
-  def height
-    @height ||= self.height
+  def in_range?(location)
+    width_in_range?(location.x) && height_in_range?(location.y)
   end
 
   #############################################################################
 
-  def in_range?(location)
-    width_in_range?(location.x) && height_in_range?(location.y)
-  end
+  private
 
   def width_in_range?(x)
     x >= 0 && x <= (width - 1)
