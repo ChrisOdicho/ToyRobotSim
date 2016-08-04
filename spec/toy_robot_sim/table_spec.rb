@@ -11,12 +11,12 @@ describe ToyRobotSim::Table do
   it 'allows objects to be placed within the width and height' do
     location = ToyRobotSim::Location.new(0,0)
 
-    expect(table.location_in_range?(location)).to be true
+    expect(table.in_range?(location)).to be true
   end
 
   it 'prevents objects from being outside the width and height' do
     location = ToyRobotSim::Location.new(10,10)
 
-    expect(table.location_in_range?(location)).to be false
+    expect(table.in_range?(location)).to be false
   end
 end
