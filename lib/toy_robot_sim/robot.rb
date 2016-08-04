@@ -7,7 +7,7 @@ class ToyRobotSim::Robot
   #############################################################################
 
   def initialize(table)
-    @table = table
+    @table = table if table.is_a?(ToyRobotSim::Table)
   end
 
   #############################################################################
@@ -20,8 +20,10 @@ class ToyRobotSim::Robot
   end
 
   def move
-    new_location = @location.send(@direction.downcase)
-    @location    = new_location if valid_move?(new_location, @direction)
+    if placed?
+      new_location = @location.send(@direction.downcase)
+      @location    = new_location if valid_move?(new_location, @direction)
+    end
   end
 
   def left
@@ -46,7 +48,13 @@ class ToyRobotSim::Robot
   end
 
   def valid_move?(location, direction)
-    table.in_range?(location) && DIRECTIONS.include?(direction)
+    table.is_a?(ToyRobotSim::Table) &&
+    table.in_range?(location) &&
+    DIRECTIONS.include?(direction)
+  end
+
+  def placed?
+    return false if (@location.nil? || @direction.nil?)
   end
 
 end

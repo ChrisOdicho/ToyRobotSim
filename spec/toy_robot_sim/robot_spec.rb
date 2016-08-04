@@ -48,13 +48,23 @@ describe ToyRobotSim::Robot do
       expect(robot.direction).to eq 'EAST'
     end
 
-    it 'can report it\'s current position on the table' do
+    it 'can report the current position on the table' do
       expect(robot.report).to eq '0,0,NORTH'
     end
 
   end
 
   context 'invalid commands' do
+
+    it 'ignores commands if not placed on a table' do
+      invalid_robot = ToyRobotSim::Robot.new("invalid table")
+      invalid_robot.place(location, 'NORTH')
+      invalid_robot.move
+
+      expect(invalid_robot.table).to eq nil
+      expect(invalid_robot.location).to eq nil
+      expect(invalid_robot.direction).to eq nil
+    end
 
     it 'cannot be placed outside the table' do
       invalid_location = ToyRobotSim::Location.new(10,10)
