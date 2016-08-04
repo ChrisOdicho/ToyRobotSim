@@ -23,23 +23,15 @@ class ToyRobotSim::Robot
   #############################################################################
 
   def place(location, direction)
-    if table.in_range?(location)
+    if valid_move?(location, direction)
       @location = location
       @direction = direction
     end
   end
 
   def move
-    case @direction
-    when 'NORTH'
-      @location = @location.north
-    when 'EAST'
-      @location = @location.east
-    when 'SOUTH'
-      @location = @location.south
-    when 'WEST'
-      @location = @location.west
-    end
+    new_location = @location.send(@direction.downcase)
+    @location    = new_location if valid_move?(new_location, @direction)
   end
 
   def left
@@ -57,6 +49,10 @@ class ToyRobotSim::Robot
 
   def report
     "#{@location.x},#{@location.y},#{@direction}"
+  end
+
+  def valid_move?(location, direction)
+    table.in_range?(location) && DIRECTIONS.include?(direction)
   end
 
 end
