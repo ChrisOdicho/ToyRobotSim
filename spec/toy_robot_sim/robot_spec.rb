@@ -51,4 +51,6 @@ describe ToyRobotSim::Robot do
     expect(robot.report).to eq '0,1,NORTH'
   end
 
+  it 'cannot be placed outside the table'
+
 end

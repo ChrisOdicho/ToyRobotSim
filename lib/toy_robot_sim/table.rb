@@ -17,6 +17,10 @@ class ToyRobotSim::Table
 
   #############################################################################
 
+  def location_in_range?(location)
+    width_in_range?(location.x) && height_in_range(location.y)
+  end
+
   def width_in_range?(x)
     x >= 0 && x <= (width - 1)
   end
