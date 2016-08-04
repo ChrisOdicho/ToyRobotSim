@@ -54,7 +54,7 @@ class ToyRobotSim::Robot
   end
 
   def placed?
-    return false if (@location.nil? || @direction.nil?)
+    (@location.nil? || @direction.nil?) ? false : true
   end
 
 end
