@@ -2,6 +2,8 @@ class ToyRobotSim::Robot
 
   DIRECTIONS = %w(NORTH EAST SOUTH WEST)
 
+  attr_accessor :location
+
   #############################################################################
 
   def initialize(table)
@@ -14,36 +16,27 @@ class ToyRobotSim::Robot
     @table ||= self.table
   end
 
-  def x
-    @x ||= self.x
-  end
-
-  def y
-    @y ||= self.y
-  end
-
   def direction
     @direction ||= self.direction
   end
 
   #############################################################################
 
-  def place(x, y, direction)
-    @x = x
-    @y = y
+  def place(location, direction)
+    @location = location
     @direction = direction
   end
 
   def move
     case @direction
     when 'NORTH'
-      @x +=1
-    when 'SOUTH'
-      @x -=1
+      @location = @location.north
     when 'EAST'
-      @y +=1
+      @location = @location.east
+    when 'SOUTH'
+      @location = @location.south
     when 'WEST'
-      @y -=1
+      @location = @location.west
     end
   end
 
@@ -61,7 +54,7 @@ class ToyRobotSim::Robot
   end
 
   def report
-    "#{@x},#{@y},#{@direction}"
+    "#{@location.x},#{@location.y},#{@direction}"
   end
 
 end
