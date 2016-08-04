@@ -51,6 +51,11 @@ describe ToyRobotSim::Robot do
     expect(robot.report).to eq '0,1,NORTH'
   end
 
-  it 'cannot be placed outside the table'
+  it 'cannot be placed outside the table' do
+    outside_location = ToyRobotSim::Location.new(10, 10)
+    robot.place(outside_location, 'NORTH')
+
+    expect(robot.location).to eq location
+  end
 
 end

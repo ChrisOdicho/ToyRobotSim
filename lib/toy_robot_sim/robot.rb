@@ -23,8 +23,10 @@ class ToyRobotSim::Robot
   #############################################################################
 
   def place(location, direction)
-    @location = location
-    @direction = direction
+    if table.in_range?(location)
+      @location = location
+      @direction = direction
+    end
   end
 
   def move
