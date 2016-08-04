@@ -1,5 +1,9 @@
 class ToyRobotSim::Robot
 
+  DIRECTIONS = %w(NORTH EAST SOUTH WEST)
+
+  #############################################################################
+
   def initialize(table)
     @table = table
   end
@@ -43,34 +47,21 @@ class ToyRobotSim::Robot
     end
   end
 
-  def turn_left
-    case @direction
-    when 'NORTH'
-      @direction = 'WEST'
-    when 'SOUTH'
-      @direction = 'EAST'
-    when 'EAST'
-      @direction = 'NORTH'
-    when 'WEST'
-      @direction = 'SOUTH'
-    end
+  def left
+    turn(-1)
   end
 
-  def turn_right
-    case @direction
-    when 'NORTH'
-      @direction = 'EAST'
-    when 'SOUTH'
-      @direction = 'WEST'
-    when 'EAST'
-      @direction = 'SOUTH'
-    when 'WEST'
-      @direction = 'NORTH'
-    end
+  def right
+    turn(1)
+  end
+
+  def turn(left_or_right)
+    current_index = DIRECTIONS.index(@direction)
+    @direction    = DIRECTIONS.rotate(left_or_right)[current_index]
   end
 
   def report
-    "#{@x}, #{@y}, #{@direction}"
+    "#{@x},#{@y},#{@direction}"
   end
 
 end

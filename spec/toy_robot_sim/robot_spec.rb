@@ -28,19 +28,19 @@ describe ToyRobotSim::Robot do
   end
 
   it 'can turn left' do
-    robot.turn_left
+    robot.left
 
     expect(robot.direction).to eq 'WEST'
   end
 
   it 'can turn right' do
-    robot.turn_right
+    robot.right
 
     expect(robot.direction).to eq 'EAST'
   end
 
   it 'can report it\'s current position on the table' do
-    expect(robot.report).to eq '0, 1, NORTH'
+    expect(robot.report).to eq '0,1,NORTH'
   end
 
 end
