@@ -4,7 +4,7 @@ describe ToyRobotSim::Parser do
   let(:table)    { ToyRobotSim::Table.new(5,5) }
   let(:robot)    { ToyRobotSim::Robot.new(table)}
   let(:location) { ToyRobotSim::Location.new(0, 0) }
-  let(:parser)   { ToyRobotSim::Parser.new }
+  let(:parser)   { ToyRobotSim::Parser }
 
   it 'executes the command for PLACE 0,0,NORTH' do
     parser.execute(robot, 'PLACE 0,0,NORTH')

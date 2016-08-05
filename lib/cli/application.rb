@@ -18,36 +18,84 @@ module ToyRobotSim
       method_option :interactive, desc: "Input commands interactively (PLACE x,y,f | MOVE | LEFT | RIGHT | REPORT ) ",
                                   aliases: "i"
 
+      #############################################################################
+
       def start
-        parser = ToyRobotSim::Parser.new
-
         if options[:directory]
-
-          if Dir.exists?(options[:directory])
-            Dir.chdir(options[:directory])
-
-            puts "Parsing directory #{options[:directory]}..."
-            puts "-"*80
-
-            Dir.glob("*.txt") do |file|
-              parser.parse(file)
-              puts "-"*80
-            end
-          else
-            puts "Error: #{options[:directory]} is an invalid directory"
-          end
-
+          directory(options[:directory])
         elsif options[:file]
+          file(options[:file])
+        elsif options[:interactive]
+          interactive
+        end
+      end
 
-          if File.file?(options[:file]) && File.extname(options[:file]) == ".txt"
-            parser.parse(options[:file])
-          else
-            puts "Error: #{options[:file]} is an invalid file"
+      #############################################################################
+
+      private
+
+      def directory(path)
+        working_directory = Dir.pwd
+
+        if Dir.exists?(path)
+          Dir.chdir(path)
+
+          puts "Parsing directory #{path}..."
+          puts "-"*80
+
+          Dir.glob("*.txt") do |file|
+            ToyRobotSim::Parser.parse(file)
+            puts "-"*80
           end
 
-        elsif options[:interactive]
-
+          Dir.chdir(working_directory)
+        else
+          puts "Error: #{path} is an invalid directory"
         end
+      end
+
+      def file(path)
+        if File.file?(path) && File.extname(path) == ".txt"
+          ToyRobotSim::Parser.parse(path)
+        else
+          puts "Error: #{path} is an invalid file"
+        end
+      end
+
+      def interactive
+
+        say("Create a table...")
+
+        width  = ask("Width: ").to_i
+        height = ask("Height: ").to_i
+
+        while width <= 0 || height <= 0
+          say ("Table width and height need to be greater than zero")
+          width  = ask("Width : ").to_i
+          height = ask("Height: ").to_i
+        end
+
+        table = ToyRobotSim::Table.new(width, height)
+        robot = ToyRobotSim::Robot.new(table)
+
+        say("Command List")
+        say( ("-"*80) )
+        say('PLACE X,Y,F | F can be NORTH, EAST, SOUTH, WEST')
+        say('MOVE        | Move forward one step')
+        say('RIGHT       | Rotate clockwise')
+        say('LEFT        | Rotate anti-clockwise')
+        say('REPORT      | Current location of the robot')
+        say('END         | Stops the simulation')
+        say( ("-"*80) )
+        say("Input a command (non case sensitive)")
+        command = ask("Command: ")
+
+        while command.upcase != 'END'
+          ToyRobotSim::Parser.execute(robot, command.upcase)
+          command = ask("Command: ")
+        end
+
+        say("Simulation Ended", Thor::Shell::Color::GREEN)
       end
 
     end
