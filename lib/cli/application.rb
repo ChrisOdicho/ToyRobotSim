@@ -70,7 +70,7 @@ module ToyRobotSim
         height = ask("Height: ").to_i
 
         while width <= 0 || height <= 0
-          say ("Table width and height need to be greater than zero")
+          say ("Table width and height need to be integers greater than zero")
           width  = ask("Width : ").to_i
           height = ask("Height: ").to_i
         end

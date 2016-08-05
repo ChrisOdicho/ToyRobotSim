@@ -3,8 +3,13 @@ class ToyRobotSim::Location
   attr_reader :x, :y
 
   def initialize(x, y)
-    @x = x.to_i
-    @y = y.to_i
+    if x.respond_to?(:to_i) && y.respond_to?(:to_i)
+      @x = x.to_i
+      @y = y.to_i
+    else
+      @x = 0
+      @y = 0
+    end
   end
 
   #############################################################################
