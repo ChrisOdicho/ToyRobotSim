@@ -2,15 +2,15 @@ module ToyRobotSim::Parser
 
   def self.parse(file)
     if (File.file?(file) && File.extname(file) == ".txt")
+
       puts "Parsing #{file}..."
       table = ToyRobotSim::Table.new(5,5)
       robot = ToyRobotSim::Robot.new(table)
+
       File.open(file).each do |instruction|
         execute(robot,instruction)
       end
-      return true
-    else
-      return false
+
     end
   end
 
@@ -31,11 +31,13 @@ module ToyRobotSim::Parser
   end
 
   def self.place(robot, instruction)
-    *xyf      = instruction[6..-1].split(',')
-    location  = ToyRobotSim::Location.new(xyf[0], xyf[1])
-    direction = xyf[2].chomp
+    if instruction =~ /PLACE [0-9]{1},[0-9]{1},(NORTH|EAST|SOUTH|WEST)/
+      *xyf      = instruction[6..-1].split(',')
+      location  = ToyRobotSim::Location.new(xyf[0], xyf[1])
+      direction = xyf[2].chomp
 
-    robot.place(location, direction)
+      robot.place(location, direction)
+    end
   end
 
 end

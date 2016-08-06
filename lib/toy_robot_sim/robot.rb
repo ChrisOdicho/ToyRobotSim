@@ -35,7 +35,7 @@ class ToyRobotSim::Robot
   end
 
   def report
-    "#{@location.x},#{@location.y},#{@direction}"
+    "#{@location.x},#{@location.y},#{@direction}" if placed?
   end
 
   #############################################################################
@@ -43,8 +43,10 @@ class ToyRobotSim::Robot
   private
 
   def turn(left_or_right)
-    current_index = DIRECTIONS.index(@direction)
-    @direction    = DIRECTIONS.rotate(left_or_right)[current_index]
+    if placed?
+      current_index = DIRECTIONS.index(@direction)
+      @direction    = DIRECTIONS.rotate(left_or_right)[current_index]
+    end
   end
 
   def valid_move?(location, direction)
