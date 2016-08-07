@@ -7,7 +7,7 @@ A Toy Robot Simulator written in Ruby 2.2.3
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'toy_robot_sim'
+gem 'toy_robot_sim', github: 'ChrisOdicho/ToyRobotSim'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install toy_robot_sim
+    $ gem install toy_robot_sim -l https://github.com/ChrisOdicho/ToyRobotSim.git
 
 ## Usage
 
