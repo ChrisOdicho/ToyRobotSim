@@ -8,5 +8,5 @@ require "toy_robot_sim/parser"
 require "cli/application"
 
 module ToyRobotSim
-  # Your code goes here...
+
 end

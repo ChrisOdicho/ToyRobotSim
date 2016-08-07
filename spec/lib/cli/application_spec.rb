@@ -16,6 +16,4 @@ describe ToyRobotSim::Cli::Application do
 
     expect{cli.start(args)}.to output(regexp).to_stdout
   end
-
-  it 'can interactively parse commands from user input'
 end

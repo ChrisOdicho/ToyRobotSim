@@ -15,7 +15,7 @@ module ToyRobotSim
                                   lazy_default: "docs/samples/instructions.txt",
                                   aliases: "f"
 
-      method_option :interactive, desc: "Input commands interactively (PLACE x,y,f | MOVE | LEFT | RIGHT | REPORT ) ",
+      method_option :interactive, desc: "Input instructions via terminal (PLACE x,y,f | MOVE | LEFT | RIGHT | REPORT ) ",
                                   aliases: "i"
 
       #############################################################################
@@ -66,7 +66,7 @@ module ToyRobotSim
 
         say("Create a table...")
 
-        width  = ask("Width: ").to_i
+        width  = ask("Width : ").to_i
         height = ask("Height: ").to_i
 
         while width <= 0 || height <= 0
@@ -78,7 +78,7 @@ module ToyRobotSim
         table = ToyRobotSim::Table.new(width, height)
         robot = ToyRobotSim::Robot.new(table)
 
-        say("Command List")
+        say("Instruction List")
         say( ("-"*80) )
         say('PLACE X,Y,F | F can be NORTH, EAST, SOUTH, WEST')
         say('MOVE        | Move forward one step')
@@ -87,15 +87,15 @@ module ToyRobotSim
         say('REPORT      | Current location of the robot')
         say('END         | Stops the simulation')
         say( ("-"*80) )
-        say("Input a command (non case sensitive)")
-        command = ask("Command: ")
+        say("Input an instruction (non case sensitive)")
+        instruction = ask("Instruction: ")
 
-        while command.upcase != 'END'
-          ToyRobotSim::Parser.execute(robot, command.upcase)
-          command = ask("Command: ")
+        while instruction.upcase != 'END'
+          ToyRobotSim::Parser.execute(robot, instruction.upcase)
+          instruction = ask("Instruction: ")
         end
 
-        say("Simulation Ended", Thor::Shell::Color::GREEN)
+        say("Toy Robot Simulation Ended", Thor::Shell::Color::GREEN)
       end
 
     end
