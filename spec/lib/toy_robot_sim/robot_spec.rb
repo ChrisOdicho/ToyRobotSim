@@ -86,5 +86,13 @@ describe ToyRobotSim::Robot do
       expect(robot.location.x).to eq 0
       expect(robot.location.y).to eq 0
     end
+
+    it 'ignores instructions if not placed' do
+      expect(robot.move).to eq nil
+      expect(robot.right).to eq nil
+      expect(robot.left).to eq nil
+      expect(robot.report).to eq nil
+    end
   end
+
 end

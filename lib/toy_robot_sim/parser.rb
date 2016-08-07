@@ -1,16 +1,20 @@
 module ToyRobotSim::Parser
 
-  def self.parse(file)
-    if (File.file?(file) && File.extname(file) == ".txt")
+  def self.parse(file_path)
+    if !File.file?(file_path)
+      puts "Error: File not found (#{file_path})"
+    elsif File.extname(file_path) != ".txt"
+      puts "Error: File not .txt (#{file_path})"
+    else
 
-      puts "Parsing #{file}..."
+      file = File.open(file_path)
+      puts "Parsing #{file.path}..."
       table = ToyRobotSim::Table.new(5,5)
       robot = ToyRobotSim::Robot.new(table)
 
-      File.open(file).each do |instruction|
+      file.each do |instruction|
         execute(robot,instruction)
       end
-
     end
   end
 
@@ -26,9 +30,13 @@ module ToyRobotSim::Parser
     elsif instruction.start_with?('REPORT')
       puts robot.report
     else
-      puts "Robot does not know what to do with instruction '#{instruction.chomp}'"
+      puts "Error: Robot does not know what to do with instruction '#{instruction.chomp}'"
     end
   end
+
+  #############################################################################
+
+  private
 
   def self.place(robot, instruction)
     if instruction =~ /PLACE [0-9]{1},[0-9]{1},(NORTH|EAST|SOUTH|WEST)/
