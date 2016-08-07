@@ -1,5 +1,4 @@
 require 'thor'
-require 'toy_robot_sim'
 
 module ToyRobotSim
   module Cli
