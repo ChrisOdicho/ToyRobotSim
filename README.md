@@ -1,37 +1,38 @@
 # ToyRobotSim
 
-A Toy Robot Simulator written in Ruby 2.2.3
+A Toy Robot Simulator developed and tested on OSX 10.11.4, Ruby 2.2.3
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Download source from Github
 
-```ruby
-gem 'toy_robot_sim', github: 'ChrisOdicho/ToyRobotSim'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install toy_robot_sim -l https://github.com/ChrisOdicho/ToyRobotSim.git
+    $ git clone https://github.com/ChrisOdicho/toy_robot_sim.git
+    $ cd toy_robot_sim
+    $ bundle install
 
 ## Usage
+To begin the toy robot simulation, navigate to the toy_robot_sim folder and run
 
-TODO: Write usage instructions here
+    $ bin/robot start -option
 
-## Development
+Note: By default `robot start` will run with interactive mode
+## Options
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+  d, [--directory=DIRECTORY]      # Choose a directory to parse
+  f, [--file=FILE]                # Choose a file to parse
+  i, [--interactive=INTERACTIVE]  # Input instructions via terminal (PLACE x,y,f | MOVE | LEFT | RIGHT | REPORT ) 
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## Samples
+To parse the default sample instructions (docs/samples) just run
 
-## Contributing
+    $ bin/robot start -d
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/toy_robot_sim. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+## Tests
+Run all the tests with
 
+    $ rake spec
 
 ## License
 
