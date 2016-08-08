@@ -24,7 +24,7 @@ module ToyRobotSim
           directory(options[:directory])
         elsif options[:file]
           file(options[:file])
-        elsif options[:interactive]
+        else
           interactive
         end
       end
